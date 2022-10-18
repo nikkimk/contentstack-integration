@@ -164,31 +164,32 @@ export function RenderRichText(uid){
   frag.innerHTML = data?.entry;
   return frag;
 }
-
-let search = window.location.search,
-  searchParams = new URLSearchParams(search),
-  requestType = !!searchParams?.get('type') ? searchParams?.get('type') : false,
-  requestUid = !!searchParams?.get('uid') ? searchParams?.get('uid') : false,
-  data = !!requestType && !!requestUid ?  FetchContent(requestType,requestUid) : false,
-  bodyContents = false,
-  bodyDesc = document.getElementById('description'),
-  bodyHeading = document.getElementById('title');
-  console.log('init',search,requestType,requestUid,data);
-if(!!data) {
-  if(bodyHeading) bodyHeading.innerHTML = data?.entry?.title || `${requestType} ${requestUid}`;
-  if(requestType == "lesson_page") {
-    bodyContents = RenderPage(requestUid);
-  } else if(requestType == "lesson"){
-    bodyContents = RenderToc(data?.entry?.lesson_pages);
-  } else if(requestType == "course") {
-    bodyContents = RenderToc(data?.entry?.lessons);
+window.onload = () => {
+  let search = window.location.search,
+    searchParams = new URLSearchParams(search),
+    requestType = !!searchParams?.get('type') ? searchParams?.get('type') : false,
+    requestUid = !!searchParams?.get('uid') ? searchParams?.get('uid') : false,
+    data = !!requestType && !!requestUid ?  FetchContent(requestType,requestUid) : false,
+    bodyContents = false,
+    bodyDesc = document.getElementById('description'),
+    bodyHeading = document.getElementById('title');
+    console.log('init',search,requestType,requestUid,data);
+  if(!!data) {
+    if(bodyHeading) bodyHeading.innerHTML = data?.entry?.title || `${requestType} ${requestUid}`;
+    if(requestType == "lesson_page") {
+      bodyContents = RenderPage(requestUid);
+    } else if(requestType == "lesson"){
+      bodyContents = RenderToc(data?.entry?.lesson_pages);
+    } else if(requestType == "course") {
+      bodyContents = RenderToc(data?.entry?.lessons);
+    }
+  } else {
+    console.log('404',bodyHeading,bodyContents);
+    if(!!bodyHeading) bodyHeading.innerHTML = `Resource Not Found`;
+    bodyContents = document.createElement('p');
+    bodyContents.innerHTML = `The requested resource 
+      ?type=${requestType}&uid=${requestUid} was not found. 
+      Return to <a href="${makeHref('course','bltcd4215b62d8888b4')}">default page</a>.`
   }
-} else {
-  console.log('404',bodyHeading,bodyContents);
-  if(!!bodyHeading) bodyHeading.innerHTML = `Resource Not Found`;
-  bodyContents = document.createElement('p');
-  bodyContents.innerHTML = `The requested resource 
-    ?type=${requestType}&uid=${requestUid} was not found. 
-    Return to <a href="${makeHref('course','bltcd4215b62d8888b4')}">default page</a>.`
+  if(!!bodyContents && !!bodyDesc) bodyDesc.append(bodyContents);  
 }
-if(!!bodyContents && !!bodyDesc) bodyDesc.append(bodyContents);
