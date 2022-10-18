@@ -21,12 +21,19 @@ export async function FetchContent(contentType,uid) {
   return content;
 };
 
-export async function RenderImage(uid) {
-  let data = FetchContent("image",uid) || false, 
-    img = !!data ? document.createElement('img') : false;
-  if(!image) return false;
-  img.setAttribute("alt", data?.entry?.alt_text);
-  img.setAttribute("src", data?.entry?.file?.url);
+export async function RenderGallery(uid) {
+  let data = FetchContent("gallery",uid) || false,
+    frag = false;
+  (data2?.entry?.images || data2?.entry?.image || []).forEach(
+    (image) => {
+      let img = RenderImage(image?.uid);
+      if(!!img) {
+        frag = fag || document.createElement('div');
+        frag.append(img);
+      }
+    }
+  );
+  return frag;
 }
 
 export async function RenderImage(uid) {
@@ -138,7 +145,10 @@ export function RenderContentSection(data,headingLevel = 2){
     content = RenderRichText(uid);
   } else if (data?._content_type_uid === 'image'){
     content = RenderImage(uid)
+  }  else if (data?._content_type_uid === 'gallery'){
+    content = RenderGallery(uid)
   } 
+  
   if(!heading && !content) return false;
   frag = document.createDocumentFragment();
   if(!!heading) frag.append(heading);
