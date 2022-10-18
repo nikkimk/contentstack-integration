@@ -184,7 +184,7 @@ if(!!data) {
     bodyContents = RenderToc(data?.entry?.lessons);
   }
 } else {
-  console.log('404');
+  console.log('404',bodyHeading,bodyContents);
   if(!!bodyHeading) bodyHeading.innerHTML = `Resource Not Found`;
   bodyContents = document.createElement('p');
   bodyContents.innerHTML = `The requested resource 
