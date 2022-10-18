@@ -148,7 +148,7 @@ export function RenderContentSection(data,headingLevel = 2){
   }  else if (data?._content_type_uid === 'gallery'){
     content = RenderGallery(uid)
   } 
-  
+
   if(!heading && !content) return false;
   frag = document.createDocumentFragment();
   if(!!heading) frag.append(heading);
@@ -184,6 +184,7 @@ if(!!data) {
     bodyContents = RenderToc(data?.entry?.lessons);
   }
 } else {
+  console.log('404');
   if(!!bodyHeading) bodyHeading.innerHTML = `Resource Not Found`;
   bodyContents = document.createElement('p');
   bodyContents.innerHTML = `The requested resource 
