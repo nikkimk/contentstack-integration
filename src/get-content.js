@@ -163,6 +163,7 @@ let search = window.location.search,
   bodyContents = false,
   bodyDesc = document.getElementById('description'),
   bodyHeading = document.getElementById('title');
+  console.log('init',search,requestType,requestUid,data);
 if(!!data) {
   if(bodyHeading) bodyHeading.innerHTML = data?.entry?.title || `${requestType} ${requestUid}`;
   if(requestType == "lesson_page") {
