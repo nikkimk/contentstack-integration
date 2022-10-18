@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import '@lrnwebcomponents/deduping-fix/deduping-fix.js';
-
+import './get-content.js';
+/*
 let search = window.location.search,
   params = new URLSearchParams(search),
   contentType = !!params.get('content_section')
@@ -117,3 +118,4 @@ function getURL(contentType, entry) {
   }
   return false;
 }
+*/
