@@ -85,8 +85,10 @@ class CourseRouting extends ApiBehaviors(LitElement) {
       if(super.updated) super.updated(changedProperties);
       changedProperties.forEach((oldValue, propName) => {
         if(propName === 'rawData' && !!this.title) {
+          let title = [...document.head.getElementsByTagName('title')];
+          if(!!title[0]) title[0].innerHTML = this.title;
           //document.head.title.innerHTML = this.title;
-          console.log(document?.head,this.title);
+          console.log(title,this.title);
         }
       });
   }
