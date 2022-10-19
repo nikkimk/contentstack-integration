@@ -82,7 +82,7 @@ class CourseRouting extends ApiBehaviors(LitElement) {
   updated(changedProperties) {
       if(super.updated) super.updated(changedProperties);
       changedProperties.forEach((oldValue, propName) => {
-        if(propName === 'rawData' && !!this.title) {
+        if(propName === 'rawData' && !!this.title && !!this.showTitle) {
           let title = [...document.head.getElementsByTagName('title')];
           if(!!title[0]) title[0].innerHTML = this.title;
         }

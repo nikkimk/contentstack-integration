@@ -67,24 +67,6 @@ class CourseTocItem extends ApiBehaviors(LitElement) {
     get defaultTitle(){
         return  `${this.titleCase(this.contentType)} ${this.index || this.uid}`;
     }
-
-    connectedCallback() {
-        super.connectedCallback();
-    }
-
-    disconnectedCallback() {
-        super.disconnectedCallback();
-    }
-    updated(changedProperties) {
-        if(super.updated) super.updated(changedProperties);
-        changedProperties.forEach((oldValue, propName) => {
-        });
-    }
-    firstUpdated(changedProperties) {
-        if(super.firstUpdated) super.firstUpdated(changedProperties);
-        changedProperties.forEach((oldValue, propName) => {
-        });
-    }
 }
 window.customElements.define(CourseTocItem.tag, CourseTocItem);
 export { CourseTocItem };

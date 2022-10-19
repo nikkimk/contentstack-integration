@@ -58,24 +58,6 @@ class CourseToc extends ApiBehaviors(LitElement) {
         </ol><br><br>${JSON.stringify(this.childEntries)}
         `;
     }
-
-    connectedCallback() {
-        super.connectedCallback();
-    }
-
-    disconnectedCallback() {
-        super.disconnectedCallback();
-    }
-    updated(changedProperties) {
-        if(super.updated) super.updated(changedProperties);
-        changedProperties.forEach((oldValue, propName) => {
-        });
-    }
-    firstUpdated(changedProperties) {
-        if(super.firstUpdated) super.firstUpdated(changedProperties);
-        changedProperties.forEach((oldValue, propName) => {
-        });
-    }
 }
 window.customElements.define(CourseToc.tag, CourseToc);
 export { CourseToc };

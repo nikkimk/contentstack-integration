@@ -4,14 +4,13 @@
  */
 import { LitElement, html, css } from "lit";
 import { ApiBehaviors } from "./api-behaviors.js";
-import './rich-text-content.js';
  /**
-  * `course-page`
-  * a single tab within `course-pages`
+  * `course-page-section`
+  * a single tab within `course-page-sections`
   * 
  ### Styling
  
- `<course-page>` provides the following custom properties
+ `<course-page-section>` provides the following custom properties
  for styling:
  
  Custom property | Description | Default
@@ -20,13 +19,13 @@ import './rich-text-content.js';
   * @customElement
   * @extends LitElement
   */
-class CoursePage extends ApiBehaviors(LitElement) {
+class CoursePageSection extends ApiBehaviors(LitElement) {
 
   /**
    * Store the tag name to make it easier to obtain directly.
    */
   static get tag() {
-    return "course-page";
+    return "course-page-section";
   }
 
   static get styles() {
@@ -39,28 +38,41 @@ class CoursePage extends ApiBehaviors(LitElement) {
   static get properties() {
     return {
       ...super.properties,
+      showTitle: {
+        type: Boolean,
+        attribute: "show-title",
+        reflect: true
+      },
       headingLevel: {
         type: Number,
         attribute: "heading-level"
       }
+      
     };
   }
   constructor() {
     super();
-    this.headingLevel = 1;
+    this.headingLevel;
   }
   
   render() {
     return html`
-      <rich-text-content rich-text="${this.rawData?.entry?.rich_text_editor}"></rich-text-content>
-      ${!this.childEntries ? '' 
-        : this.childEntries.map(child => html`
-          <p>${JSON.stringify(child)}</p><br><br>
-        `)
+      ${!this.title || !this.showTitle 
+        ? '' 
+        : this.headingLevel === 1 
+          ? html`<h1>${this.title}</h1>`
+          : this.headingLevel === 2 
+            ? html`<h2>${this.title}</h2>`
+            : this.headingLevel === 3 
+              ? html`<h3>${this.title}</h3>`
+              : this.headingLevel === 4 
+                ? html`<h4>${this.title}</h4>`
+                : this.headingLevel === 5 
+                  ? html`<h5>${this.title}</h5>`
+                  : html`<h6>${this.title}</h6>`
       }
     `;
-  }
-
+  }s
   connectedCallback() {
     super.connectedCallback();
   }
@@ -79,5 +91,5 @@ class CoursePage extends ApiBehaviors(LitElement) {
     });
   }
 }
-window.customElements.define(CoursePage.tag, CoursePage);
-export { CoursePage };
+window.customElements.define(CoursePageSection.tag, CoursePageSection);
+export { CoursePageSection };

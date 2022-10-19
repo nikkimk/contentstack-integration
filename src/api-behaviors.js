@@ -52,7 +52,7 @@ export const ApiBehaviors = function (SuperClass) {
             : this.contentType === "lesson" 
                 ? "lesson_pages"
                 : this.contentType === "lesson_page" 
-                    ? "content" 
+                    ? "lesson_contents" 
                     : this.contentType === "gallery" 
                         ? "image" 
                         : undefined;

@@ -22,14 +22,12 @@
         `:""}connectedCallback(){super.connectedCallback()}disconnectedCallback(){super.disconnectedCallback()}updated(t){super.updated&&super.updated(t),t.forEach(((t,n)=>{}))}firstUpdated(t){super.firstUpdated&&super.firstUpdated(t),t.forEach(((t,n)=>{}))}}window.customElements.define(ut.tag,ut);class ot extends(rt(nt)){static get tag(){return"course-routing"}static get styles(){return[o`
       `]}static get properties(){return{...super.properties}}constructor(){super()}render(){return L`
       <h1>${this.title}</h1>
-      ${this.rawData?"course"===this.contentType?L`
+      ${this.rawData?"course"===this.contentType||"lesson"===this.contentType?L`
           <course-toc 
             .raw-data="${this.rawData}"
             content-type="${this.contentType}"
             uid="${this.uid}"
           ></course-toc>
-      `:"lesson"===this.contentType?L`
-          LESSON
       `:"lesson_page"===this.contentType?L`
           PAGE
       `:L`NONE`:L`
@@ -40,4 +38,4 @@
           </a>.
 
       `}
-    `}get notFound(){return"Resource Not Found"}connectedCallback(){super.connectedCallback();let t=window.location.search,n=new URLSearchParams(t);this.contentType=!!n?.get("type")&&n?.get("type"),this.uid=!!n?.get("uid")&&n?.get("uid")}updated(t){super.updated&&super.updated(t),t.forEach(((t,n)=>{if("rawData"===n&&this.title){let t=[...document.head.getElementsByTagName("title")];t[0]&&(t[0].innerHTML=this.title),console.log(t,this.title)}}))}}window.customElements.define(ot.tag,ot);const at=window.customElements.define;window.customElements.define=(t,n,e)=>{customElements.get(t)?console.warn(`${t} has been defined twice`):at.call(window.customElements,t,n,e)}})()})();
+    `}get notFound(){return"Resource Not Found"}connectedCallback(){super.connectedCallback();let t=window.location.search,n=new URLSearchParams(t);this.contentType=!!n?.get("type")&&n?.get("type"),this.uid=!!n?.get("uid")&&n?.get("uid")}updated(t){super.updated&&super.updated(t),t.forEach(((t,n)=>{if("rawData"===n&&this.title){let t=[...document.head.getElementsByTagName("title")];t[0]&&(t[0].innerHTML=this.title)}}))}}window.customElements.define(ot.tag,ot);const at=window.customElements.define;window.customElements.define=(t,n,e)=>{customElements.get(t)?console.warn(`${t} has been defined twice`):at.call(window.customElements,t,n,e)}})()})();
