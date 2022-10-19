@@ -75,9 +75,9 @@ export const ApiBehaviors = function (SuperClass) {
             console.log('updating',this.fetchConfig);
             let getData = async() => {
                 const response = await fetch(this.apiURL, this.fetchConfig);
-                return response.json();
+                this.rawData = await response.json();
             };
-            this.rawData = getData();
+             getData();
         }
     };
 };
