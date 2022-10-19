@@ -31,10 +31,6 @@ export const ApiBehaviors = function (SuperClass) {
         updated(changedProperties) {
             changedProperties.forEach((oldValue, propName) => {
                 if(['contentType','uid'].includes(propName) && !!this.contentType && !!this.uid) this.updateData();
-                if(propName === 'rawData' && !!document?.head?.title && !!this.title) {
-                  document.head.title.innerHTML = this.title;
-                  console.log(document?.head?.title,this.title);
-                }
                 if(propName === 'rawData') console.log('data updated',this,this.rawData);
             });
         }
