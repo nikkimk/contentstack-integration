@@ -71,10 +71,10 @@ class CoursePageSection extends ApiBehaviors(LitElement) {
                   ? html`<h5>${this.title}</h5>`
                   : html`<h6>${this.title}</h6>`
       }
+      ${!this.rawData?.entry?.rich_text_editor ? '' : this.renderContentType('rich_text_editor',this.uid,this.rawData?.entry?.rich_text_editor)}
       ${!this.childEntries ? '' 
         : this.childEntries.map(child => html`
-          ${this.renderContentType(child?._content_type_uid,this.uid,undefined,true,this.headingLevel++)}
-          <p>${JSON.stringify(child)}</p><br><br>
+          ${this.renderContentType(child?._content_type_uid,child?.uid,undefined,true,this.headingLevel++)}
         `)
       }
     `;

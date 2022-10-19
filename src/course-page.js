@@ -55,7 +55,6 @@ class CoursePage extends ApiBehaviors(LitElement) {
       ${!this.childEntries ? '' 
         : this.childEntries.map(child => html`
           ${this.renderContentType(child?._content_type_uid,child?.uid,undefined,true,this.headingLevel++)}
-          <p>${JSON.stringify(child)}</p><br><br>
         `)
       }
     `;

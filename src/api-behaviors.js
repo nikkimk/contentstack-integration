@@ -90,48 +90,37 @@ export const ApiBehaviors = function (SuperClass) {
             };
         }
         renderContentType(contentType,uid,rawData,showTitle = false,headingLevel = 2){
-            if(this.contentType === "course" || this.contentType === "lesson"){
+            if(contentType === "course" || contentType === "lesson"){
                 import('./course-toc.js');
                 return html`
                     <course-toc 
-                    .raw-data="${this.rawData}"
-                    content-type="${this.contentType}"
-                    uid="${this.uid}"
+                    .raw-data="${rawData}"
+                    content-type="${contentType}"
+                    uid="${uid}"
                     ></course-toc>
                 `;
-            } else if(this.contentType === "lesson_page"){
-                import('./course-page.js');
-                return html`
-                    <course-page 
-                    .raw-data="${this.rawData}"
-                    content-type="${this.contentType}"
-                    uid="${this.uid}"
-                    ?show-title="${showTitle}"
-                    heading-level="${headingLevel}"
-                    ></course-page>
-                `
-            } else if(this.contentType === "content_section"){
+            } else if(contentType === "lesson_page" || contentType === "content_section"){
                 import('./course-page-section.js');
                 return html`
                     <course-page-section
-                    .raw-data="${this.rawData}"
-                    content-type="${this.contentType}"
-                    uid="${this.uid}"
+                    .raw-data="${rawData}"
+                    content-type="${contentType}"
+                    uid="${uid}"
                     ?show-title="${showTitle}"
                     heading-level="${headingLevel}"
                     ></course-page-section>
                 `
-            } else if(this.contentType === "rich_text_editor"){
+            } else if(contentType === "rich_text_editor"){
                 import('./rich-text-content.js');
                 return html`
                     <rich-text-content 
-                    .rich-text="${this.rawData}"
+                    .raw-data="${rawData}"
                     ?show-title="${showTitle}"
                     heading-level="${headingLevel}"
                     ></rich-text-content>
                 `;
             } else {
-                return 'NONE';
+                return html`NONE ${contentType} / ${uid} <br>"${rawData}`;
             }
         }
 

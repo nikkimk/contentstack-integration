@@ -4,6 +4,5 @@
       ${this.rawData?.entry?.rich_text_editor?this.renderContentType("rich_text_editor",this.uid,this.rawData?.entry?.rich_text_editor):""}
       ${this.childEntries?this.childEntries.map((e=>i.dy`
           ${this.renderContentType(e?._content_type_uid,e?.uid,void 0,!0,this.headingLevel++)}
-          <p>${JSON.stringify(e)}</p><br><br>
         `)):""}
     `}connectedCallback(){super.connectedCallback()}disconnectedCallback(){super.disconnectedCallback()}updated(e){super.updated&&super.updated(e),e.forEach(((e,t)=>{}))}firstUpdated(e){super.firstUpdated&&super.firstUpdated(e),e.forEach(((e,t)=>{}))}}window.customElements.define(a.tag,a)}}]);
