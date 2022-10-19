@@ -23,46 +23,42 @@ export const ApiBehaviors = function (SuperClass) {
                 }
             };
         }
-        constructor() {
-            super();
-        }
-        
-        connectedCallback() {
-            super.connectedCallback();
-        }
-        
-        disconnectedCallback() {
-            super.disconnectedCallback();
-        }
         updated(changedProperties) {
             changedProperties.forEach((oldValue, propName) => {
                 if(['contentType','uid'].includes(propName) && !!this.contentType && !!this.uid) this.updateData();
                 if(propName === 'rawData') console.log('data updated',this.rawData);
-            });
+            });s
         }
         get apiURL(){
             return this.makeApiURL(this.contentType,this.uid);
         }
+        get fetchConfig(){
+            console.log(this.apiURL);
+            return {
+                type: "GET",
+                url: this.apiURL,
+                headers: {
+                    "Content-Type": "application/json",
+                    api_key: "blt7836b431547639d4",
+                    access_token: "cscae096889624674a41446817"
+                },
+                dataType: "json"
+            };
+        }
         makeApiURL(contentType,uid){
-            !!contentType && !!uid ? `https://cdn.contentstack.io/v3/content_types/${contentType}/entries/${uid}?environment=production` : false
+            return !!contentType && !!uid ? `https://cdn.contentstack.io/v3/content_types/${contentType}/entries/${uid}?environment=production` : false;
+        }
+        makeRoute(contentType,uid){
+            return !!contentType && !!uid ? `?type=${contentType}&uid=${uid}` : false;
         }
         updateData(){
+            console.log('updating',this.fetchConfig);
             let getData = async() => {
-                const response = await fetch(url, {
-                    type: "GET",
-                    url: this.apiURL,
-                    headers: {
-                        "Content-Type": "application/json",
-                        api_key: "blt7836b431547639d4",
-                        access_token: "cscae096889624674a41446817"
-                    },
-                    dataType: "json"
-                });
+                const response = await fetch(url, this.fetchConfig);
                 return response.json();
             };
-            console.log('updating');
             this.rawData = getData();
         }
-    }
-}
+    };
+};
  
