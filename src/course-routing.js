@@ -56,14 +56,12 @@ class CourseRouting extends ApiBehaviors(LitElement) {
             default page
           </a>.
 
-      ` : this.contentType === "course" ? html`
+      ` : this.contentType === "course" || this.contentType === "lesson" ? html`
           <course-toc 
             .raw-data="${this.rawData}"
             content-type="${this.contentType}"
             uid="${this.uid}"
           ></course-toc>
-      ` : this.contentType === "lesson" ? html`
-          LESSON
       ` : this.contentType === "lesson_page" ? html`
           PAGE
       ` : html`NONE`}
@@ -87,8 +85,6 @@ class CourseRouting extends ApiBehaviors(LitElement) {
         if(propName === 'rawData' && !!this.title) {
           let title = [...document.head.getElementsByTagName('title')];
           if(!!title[0]) title[0].innerHTML = this.title;
-          //document.head.title.innerHTML = this.title;
-          console.log(title,this.title);
         }
       });
   }
