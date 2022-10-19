@@ -41,7 +41,7 @@ export const ApiBehaviors = function (SuperClass) {
             return  `${this.titleCase(this.contentType)} ${this.uid}`;
         }
         get title(){
-            return !this.rawData ? this.notFound : this.titleCase(this.rawData?.entry?.title) || this.defaultTitle;
+            return !this.rawData ? this.notFound : this.rawData?.entry?.title || this.defaultTitle;
         }
         get apiURL(){
             return this.makeApiURL(this.contentType,this.uid);

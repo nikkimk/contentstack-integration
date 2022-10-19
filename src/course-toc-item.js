@@ -51,14 +51,14 @@ class CourseTocItem extends ApiBehaviors(LitElement) {
 
     render() {
         return !this.rawData ? '' : html`
-        <a href="">${this.title}</a>
-        ${!this.childEntries ? '' : html`
-            <course-toc
-                .raw-data="${this.rawData}"
-                content-type="${this.contentType}"
-                uid="${this.uid}">
-            </course-toc>
-        `}<br><br>${JSON.stringify(this.childEntries)}
+            <a href="${this.makeRoute(this.contentType,this.uid)}">${this.title}</a>
+            ${!this.childEntries ? '' : html`
+                <course-toc
+                    .raw-data="${this.rawData}"
+                    content-type="${this.contentType}"
+                    uid="${this.uid}">
+                </course-toc>
+            `}
         `;
     }
     get notFound(){
