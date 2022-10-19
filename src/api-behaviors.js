@@ -48,7 +48,7 @@ export const ApiBehaviors = function (SuperClass) {
                         ? "image" 
                         : undefined;
         }
-        get children(){
+        get childEntries(){
             return !this.rawData?.entry || !this.childType ? undefined : this.rawData.entry[this.childType];
         }
         get fetchConfig(){
@@ -77,7 +77,7 @@ export const ApiBehaviors = function (SuperClass) {
                 const response = await fetch(this.apiURL, this.fetchConfig);
                 this.rawData = await response.json();
             };
-             getData();
+            getData();
         }
     };
 };
