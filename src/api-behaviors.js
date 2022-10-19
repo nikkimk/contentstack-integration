@@ -32,6 +32,20 @@ export const ApiBehaviors = function (SuperClass) {
         get apiURL(){
             return this.makeApiURL(this.contentType,this.uid);
         }
+        get childType(){
+         return this.contentType === "course" 
+            ? "lessons" 
+            : this.contentType === "lesson" 
+                ? "lesson_pages"
+                : this.contentType === "lesson_page" 
+                    ? "content" 
+                    : this.contentType === "gallery" 
+                        ? "image" 
+                        : undefined;
+        }
+        get children(){
+            return !this.rawData?.entry || !this.childType ? undefined : this.rawData.entry[this.childType];
+        }
         get fetchConfig(){
             console.log(this.apiURL);
             return {

@@ -37,7 +37,7 @@
    // properties available to the custom element for data binding
    static get properties() {
      return {
-       
+       ...super.properties
      };
    }
    constructor() {
@@ -45,8 +45,7 @@
    }
    
    render() {
-     return html`
-     `;
+     return html`${JSON.stringify(this.children)}`;
    }
  
    connectedCallback() {
