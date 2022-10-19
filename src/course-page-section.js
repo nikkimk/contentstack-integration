@@ -52,7 +52,7 @@ class CoursePageSection extends ApiBehaviors(LitElement) {
   }
   constructor() {
     super();
-    this.headingLevel;
+    this.headingLevel = 2;
   }
   
   render() {
@@ -70,6 +70,12 @@ class CoursePageSection extends ApiBehaviors(LitElement) {
                 : this.headingLevel === 5 
                   ? html`<h5>${this.title}</h5>`
                   : html`<h6>${this.title}</h6>`
+      }
+      ${!this.childEntries ? '' 
+        : this.childEntries.map(child => html`
+          ${this.renderContentType(child?._content_type_uid,this.uid,undefined,true,this.headingLevel++)}
+          <p>${JSON.stringify(child)}</p><br><br>
+        `)
       }
     `;
   }s

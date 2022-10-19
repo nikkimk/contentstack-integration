@@ -98,7 +98,7 @@ export const ApiBehaviors = function (SuperClass) {
                     ></course-toc>
                 `;
             } else if(this.contentType === "lesson_page"){
-                import('./course-toc.js');
+                import('./course-page.js');
                 return html`
                     <course-page 
                     .raw-data="${this.rawData}"
@@ -107,6 +107,17 @@ export const ApiBehaviors = function (SuperClass) {
                     ?show-title="${showTitle}"
                     heading-level="${headingLevel}"
                     ></course-page>
+                `
+            } else if(this.contentType === "content_section"){
+                import('./content-page-section.js');
+                return html`
+                    <course-page-section
+                    .raw-data="${this.rawData}"
+                    content-type="${this.contentType}"
+                    uid="${this.uid}"
+                    ?show-title="${showTitle}"
+                    heading-level="${headingLevel}"
+                    ></course-page-section>
                 `
             } else if(this.contentType === "rich_text_editor"){
                 import('./rich-text-content.js');

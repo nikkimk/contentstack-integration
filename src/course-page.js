@@ -54,6 +54,7 @@ class CoursePage extends ApiBehaviors(LitElement) {
       ${!this.rawData?.entry?.rich_text_editor ? '' : this.renderContentType('rich_text_editor',this.uid,this.rawData?.entry?.rich_text_editor)}
       ${!this.childEntries ? '' 
         : this.childEntries.map(child => html`
+          ${this.renderContentType(child?._content_type_uid,this.uid,undefined,true,this.headingLevel++)}
           <p>${JSON.stringify(child)}</p><br><br>
         `)
       }
