@@ -5,7 +5,8 @@
 import { LitElement, html, css } from "lit";
 import { ApiBehaviors } from "./api-behaviors.js";
 import './course-toc.js';
- 
+import './course-page.js';
+
  /**
   * `course-routing`
   * a single tab within `course-routings`
@@ -63,7 +64,11 @@ class CourseRouting extends ApiBehaviors(LitElement) {
             uid="${this.uid}"
           ></course-toc>
       ` : this.contentType === "lesson_page" ? html`
-          PAGE
+          <course-page 
+            .raw-data="${this.rawData}"
+            content-type="${this.contentType}"
+            uid="${this.uid}"
+          ></course-page>
       ` : html`NONE`}
     `;
   }
