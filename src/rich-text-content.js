@@ -18,7 +18,7 @@ import { LitElement, html, css } from "lit";
   * @customElement
   * @extends LitElement
   */
-class RichTextContent extends ApiBehaviors(LitElement) {
+class RichTextContent extends LitElement {
 
   /**
    * Store the tag name to make it easier to obtain directly.

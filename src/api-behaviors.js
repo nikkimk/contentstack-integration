@@ -64,6 +64,8 @@ export const ApiBehaviors = function (SuperClass) {
                 ? "lesson_page"
                 : this.contentType === "lesson_page" 
                     ? "content_section" 
+                    : this.contentType === "rich_text_editor" 
+                        ? "rich_text_editor" 
                     : this.contentType === "gallery" 
                         ? "image" 
                         : undefined;
@@ -85,6 +87,41 @@ export const ApiBehaviors = function (SuperClass) {
                 dataType: "json"
             };
         }
+        renderContentType(contentType,uid,rawData,showTitle = false,headingLevel = 2){
+            if(this.contentType === "course" || this.contentType === "lesson"){
+                import('./course-toc.js');
+                return html`
+                    <course-toc 
+                    .raw-data="${this.rawData}"
+                    content-type="${this.contentType}"
+                    uid="${this.uid}"
+                    ></course-toc>
+                `;
+            } else if(this.contentType === "lesson_page"){
+                import('./course-toc.js');
+                return html`
+                    <course-page 
+                    .raw-data="${this.rawData}"
+                    content-type="${this.contentType}"
+                    uid="${this.uid}"
+                    ?show-title="${showTitle}"
+                    heading-level="${headingLevel}"
+                    ></course-page>
+                `
+            } else if(this.contentType === "rich_text_editor"){
+                import('./rich-text-content.js');
+                return html`
+                    <rich-text-content 
+                    .rich-text="${this.rawData}"
+                    ?show-title="${showTitle}"
+                    heading-level="${headingLevel}"
+                    ></rich-text-content>
+                `;
+            } else {
+                return 'NONE';
+            }
+        }
+
         titleCase(str){
             return str.replace(
                 /\w\S*/g,

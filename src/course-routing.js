@@ -4,8 +4,6 @@
  */
 import { LitElement, html, css } from "lit";
 import { ApiBehaviors } from "./api-behaviors.js";
-import './course-toc.js';
-import './course-page.js';
 
  /**
   * `course-routing`
@@ -57,19 +55,7 @@ class CourseRouting extends ApiBehaviors(LitElement) {
             default page
           </a>.
 
-      ` : this.contentType === "course" || this.contentType === "lesson" ? html`
-          <course-toc 
-            .raw-data="${this.rawData}"
-            content-type="${this.contentType}"
-            uid="${this.uid}"
-          ></course-toc>
-      ` : this.contentType === "lesson_page" ? html`
-          <course-page 
-            .raw-data="${this.rawData}"
-            content-type="${this.contentType}"
-            uid="${this.uid}"
-          ></course-page>
-      ` : html`NONE`}
+      ` : this.renderContentType(this.contentType,this.uid,this.rawData)}
     `;
   }
   get notFound(){

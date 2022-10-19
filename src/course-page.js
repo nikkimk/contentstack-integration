@@ -4,7 +4,6 @@
  */
 import { LitElement, html, css } from "lit";
 import { ApiBehaviors } from "./api-behaviors.js";
-import './rich-text-content.js';
  /**
   * `course-page`
   * a single tab within `course-pages`
@@ -52,7 +51,7 @@ class CoursePage extends ApiBehaviors(LitElement) {
   
   render() {
     return html`
-      <rich-text-content rich-text="${this.rawData?.entry?.rich_text_editor}"></rich-text-content>
+      ${!this.rawData?.entry?.rich_text_editor ? '' : this.renderContentType('rich_text_editor',this.uid,this.rawData?.entry?.rich_text_editor)}
       ${!this.childEntries ? '' 
         : this.childEntries.map(child => html`
           <p>${JSON.stringify(child)}</p><br><br>
