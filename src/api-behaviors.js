@@ -7,6 +7,8 @@
   * provides connection to ContentStack API
   * 
   */
+import { html } from 'lit';
+
 export const ApiBehaviors = function (SuperClass) {
     return class extends SuperClass {
         // properties available to the custom element for data binding
@@ -109,7 +111,7 @@ export const ApiBehaviors = function (SuperClass) {
                     ></course-page>
                 `
             } else if(this.contentType === "content_section"){
-                import('./content-page-section.js');
+                import('./course-page-section.js');
                 return html`
                     <course-page-section
                     .raw-data="${this.rawData}"

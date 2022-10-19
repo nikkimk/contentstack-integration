@@ -1,0 +1,3 @@
+/*! For license information please see 988.main.js.LICENSE.txt */
+"use strict";(self.webpackChunkgetting_started_using_a_configuration=self.webpackChunkgetting_started_using_a_configuration||[]).push([[988],{988:(t,e,r)=>{r.r(e),r.d(e,{RichTextContent:()=>s});var i=r(897);class s extends i.oi{static get tag(){return"rich-text-content"}static get styles(){return[i.iv`
+      `]}static get properties(){return{richText:{type:String,attribute:"rich-text",reflect:!0}}}constructor(){super()}render(){return i.dy`<slot></slot>`}updated(t){super.updated&&super.updated(t),t.forEach(((t,e)=>{"richText"===e&&this.richText&&(this.innerHTML=this.richText)}))}}window.customElements.define(s.tag,s)}}]);
