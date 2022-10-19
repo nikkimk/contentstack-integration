@@ -4,6 +4,7 @@
  */
 import { LitElement, html, css } from "lit";
 import { ApiBehaviors } from "./api-behaviors.js";
+import './course-toc-item.js';
 
 /**
  * `course-toc`

@@ -21,80 +21,72 @@ import './course-toc.js';
   * @customElement
   * @extends LitElement
   */
- class CourseRouting extends ApiBehaviors(LitElement) {
- 
-    /**
-     * Store the tag name to make it easier to obtain directly.
-     */
-    static get tag() {
-      return "course-routing";
-    }
+class CourseRouting extends ApiBehaviors(LitElement) {
 
-   static get styles() {
-     return [
-       css`
-       `,
-     ];
-   }
-   // properties available to the custom element for data binding
-   static get properties() {
-     return {
-        ...super.properties,
-     };
-   }
-   constructor() {
-     super();
-   }
-   
-   render() {
-     return html`
-        <h1>${this.title}</h1>
-        ${!this.rawData ? html`
-            <p>The requested resource 
-            <tt>${this.makeRoute(this.contentType,this.uid)}</tt> was not found.
-            Return to <a href="${this.makeRoute('course','bltcd4215b62d8888b4')}">
-                default page
-            </a>.
+  /**
+   * Store the tag name to make it easier to obtain directly.
+   */
+  static get tag() {
+    return "course-routing";
+  }
 
-        ` : this.contentType === "course" ? html`
-            <course-toc 
-              .raw-data="${this.rawData}"
-              content-type="${this.contentType}"
-              uid="${this.uid}"
-            ></course-toc>
-        ` : this.contentType === "lesson" ? html`
-            LESSON
-        ` : this.contentType === "lesson_page" ? html`
-            PAGE
-        ` : html`NONE`}
-     `;
-   }
-   get notFound(){
-       return 'Resource Not Found';
-   }
- 
-   connectedCallback() {
-     super.connectedCallback();
-     let search = window.location.search,
-       searchParams = new URLSearchParams(search);
+  static get styles() {
+    return [
+      css`
+      `,
+    ];
+  }
+  // properties available to the custom element for data binding
+  static get properties() {
+    return {
+      ...super.properties,
+    };
+  }
+  constructor() {
+    super();
+  }
+  
+  render() {
+    return html`
+      <h1>${this.title}</h1>
+      ${!this.rawData ? html`
+          <p>The requested resource 
+          <tt>${this.makeRoute(this.contentType,this.uid)}</tt> was not found.
+          Return to <a href="${this.makeRoute('course','bltcd4215b62d8888b4')}">
+            default page
+          </a>.
+
+      ` : this.contentType === "course" ? html`
+          <course-toc 
+            .raw-data="${this.rawData}"
+            content-type="${this.contentType}"
+            uid="${this.uid}"
+          ></course-toc>
+      ` : this.contentType === "lesson" ? html`
+          LESSON
+      ` : this.contentType === "lesson_page" ? html`
+          PAGE
+      ` : html`NONE`}
+    `;
+  }
+  get notFound(){
+    return 'Resource Not Found';
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    let search = window.location.search,
+      searchParams = new URLSearchParams(search);
     this.contentType = !!searchParams?.get('type') ? searchParams?.get('type') : false;
     this.uid = !!searchParams?.get('uid') ? searchParams?.get('uid') : false;
-   }
- 
-    disconnectedCallback() {
-        super.disconnectedCallback();
-    }
+  }
 
-    updated(changedProperties) {
-        if(super.updated) super.updated(changedProperties);
-        changedProperties.forEach((oldValue, propName) => {
-            if(propName === 'rawData') console.log(document?.head?.title,this.title);
-        });
-    }
-    firstUpdated(changedProperties) {
-        if(super.firstUpdated) super.firstUpdated(changedProperties);
-    }
- }
- window.customElements.define(CourseRouting.tag, CourseRouting);
- export { CourseRouting };
+  updated(changedProperties) {
+      if(super.updated) super.updated(changedProperties);
+      changedProperties.forEach((oldValue, propName) => {
+      });
+  }
+}
+window.customElements.define(CourseRouting.tag, CourseRouting);
+export { CourseRouting };
  

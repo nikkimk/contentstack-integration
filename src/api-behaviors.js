@@ -31,8 +31,12 @@ export const ApiBehaviors = function (SuperClass) {
         updated(changedProperties) {
             changedProperties.forEach((oldValue, propName) => {
                 if(['contentType','uid'].includes(propName) && !!this.contentType && !!this.uid) this.updateData();
-                if(propName === 'rawData') console.log('data updated',this.rawData);
-            });s
+                if(propName === 'rawData' && !!document?.head?.title && !!this.title) {
+                  document.head.title.innerHTML = this.title;
+                  console.log(document?.head?.title,this.title);
+                }
+                if(propName === 'rawData') console.log('data updated',this,this.rawData);
+            });
         }
         get notFound(){
             return undefined;
@@ -41,7 +45,6 @@ export const ApiBehaviors = function (SuperClass) {
             return  `${this.titleCase(this.contentType)} ${this.uid}`;
         }
         get title(){
-            console.log(this.rawData);
             return !this.rawData ? this.notFound : this.titleCase(this.rawData?.entry?.title) || this.defaultTitle;
         }
         get apiURL(){
@@ -74,7 +77,7 @@ export const ApiBehaviors = function (SuperClass) {
             return !this.rawData?.entry || !this.childrenType ? undefined : this.rawData.entry[this.childrenType];
         }
         get fetchConfig(){
-            console.log(this.apiURL);
+            console.log(this,this.apiURL);
             return {
                 type: "GET",
                 url: this.apiURL,
@@ -102,7 +105,6 @@ export const ApiBehaviors = function (SuperClass) {
         }
         updateData(){
             if(!this.apiURL) return;
-            console.log('updating',this.fetchConfig);
             let getData = async() => {
                 const response = await fetch(this.apiURL, this.fetchConfig);
                 this.rawData = await response.json();
