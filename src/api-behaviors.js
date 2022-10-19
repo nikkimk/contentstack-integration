@@ -99,7 +99,7 @@ export const ApiBehaviors = function (SuperClass) {
                     uid="${uid}"
                     ></course-toc>
                 `;
-            } else if(contentType === "lesson_page" || contentType === "content_section"){
+            } else if(contentType === "lesson_page" || contentType === "content_section" || contentType === "gallery"){
                 import('./course-page-section.js');
                 return html`
                     <course-page-section
@@ -118,6 +118,17 @@ export const ApiBehaviors = function (SuperClass) {
                     ?show-title="${showTitle}"
                     heading-level="${headingLevel}"
                     ></rich-text-content>
+                `;
+            } else if(contentType === "image"){
+                import('./course-image.js');
+                return html`
+                    <course-image 
+                    .raw-data="${rawData}"
+                    content-type="${contentType}"
+                    uid="${uid}"
+                    ?show-title="${showTitle}"
+                    heading-level="${headingLevel}"
+                    ></course-image>
                 `;
             } else {
                 return html`NONE ${contentType} / ${uid} <br>"${rawData}`;

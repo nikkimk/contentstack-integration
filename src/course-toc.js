@@ -47,7 +47,7 @@ class CourseToc extends ApiBehaviors(LitElement) {
     }
 
     render() {
-        return !this.childEntries ? '' : html`
+        return !this.childEntries && this.contentType !=="lesson_page" ? '' : html`
         <ol>
             ${this.childEntries.map(child => html`<li>
                 <course-toc-item 
@@ -55,7 +55,7 @@ class CourseToc extends ApiBehaviors(LitElement) {
                     uid="${child?.uid}">
                 </course-toc-item>
             </li>`)}
-        </ol><br><br>${JSON.stringify(this.childEntries)}
+        </ol>
         `;
     }
 }

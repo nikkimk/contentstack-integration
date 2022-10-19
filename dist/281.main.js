@@ -1,0 +1,9 @@
+/*! For license information please see 281.main.js.LICENSE.txt */
+"use strict";(self.webpackChunkgetting_started_using_a_configuration=self.webpackChunkgetting_started_using_a_configuration||[]).push([[281],{281:(t,e,i)=>{i.r(e),i.d(e,{CourseImage:()=>a});var s=i(897),r=i(769);class a extends((0,r.s)(s.oi)){static get tag(){return"course-image"}static get styles(){return[s.iv`
+       `]}static get properties(){return{...super.properties,showTitle:{type:Boolean,attribute:"show-title",reflect:!0},headingLevel:{type:Number,attribute:"heading-level"}}}constructor(){super(),this.headingLevel=2}render(){return s.dy`
+            ${this.title&&this.showTitle?1===this.headingLevel?s.dy`<h1>${this.title}</h1>`:2===this.headingLevel?s.dy`<h2>${this.title}</h2>`:3===this.headingLevel?s.dy`<h3>${this.title}</h3>`:4===this.headingLevel?s.dy`<h4>${this.title}</h4>`:5===this.headingLevel?s.dy`a<h5>${this.title}</h5>`:s.dy`<h6>${this.title}</h6>`:""}
+            <figure>
+                <img width="33%" src="${this.url}" alt="${this.alt}">
+                <figcaption>${this.desc}</figcaption>
+            </figure>
+        `}get file(){return this.rawData?.entry?.file}get url(){return this.file?.url}get alt(){return this.rawData?.entry?.alt_text}get desc(){return this.rawData?.entry?.long_description}connectedCallback(){super.connectedCallback()}disconnectedCallback(){super.disconnectedCallback()}updated(t){super.updated&&super.updated(t),t.forEach(((t,e)=>{})),console.log(this,this.rawData?.entry)}firstUpdated(t){super.firstUpdated&&super.firstUpdated(t),t.forEach(((t,e)=>{}))}}window.customElements.define(a.tag,a)}}]);
