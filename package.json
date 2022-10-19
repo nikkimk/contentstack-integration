@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@lrnwebcomponents/deduping-fix": "^4.0.0",
+    "lit": "^2.4.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
