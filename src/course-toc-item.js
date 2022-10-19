@@ -4,29 +4,29 @@
  */
 import { LitElement, html, css } from "lit";
 import { ApiBehaviors } from "./api-behaviors.js";
-
+ 
 /**
- * `course-toc`
- * a single tab within `course-tocs`
- * 
+  * `course-toc-item`
+  * a single tab within `course-toc-items`
+  * 
 ### Styling
 
-`<course-toc>` provides the following custom properties
+`<course-toc-item>` provides the following custom properties
 for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-  *
+*
 * @customElement
- * @extends LitElement
- */
-class CourseToc extends ApiBehaviors(LitElement) {
- 
+* @extends LitElement
+*/
+class CourseTocItem extends ApiBehaviors(LitElement) {
+
     /**
      * Store the tag name to make it easier to obtain directly.
      */
     static get tag() {
-        return "course-toc";
+        return "course-toc-item";
     }
 
     static get styles() {
@@ -38,7 +38,11 @@ class CourseToc extends ApiBehaviors(LitElement) {
     // properties available to the custom element for data binding
     static get properties() {
         return {
-        ...super.properties
+            ...super.properties,
+            index: {
+                type: Number,
+                attribute: 'index'
+            }
         };
     }
     constructor() {
@@ -46,16 +50,22 @@ class CourseToc extends ApiBehaviors(LitElement) {
     }
 
     render() {
-        return !this.childEntries ? '' : html`
-        <ol>
-            ${this.childEntries.map(child => html`<li>
-                <course-toc-item 
-                    content-type="${this.childType}"
-                    uid="${child?.uid}">
-                </course-toc-item>
-            </li>`)}
-        </ol><br><br>${JSON.stringify(this.childEntries)}
+        return !this.rawData ? '' : html`
+        <a href="">${this.title}</a>
+        ${!this.childEntries ? '' : html`
+            <course-toc
+                .raw-data="${this.rawData}"
+                content-type="${this.contentType}"
+                uid="${this.uid}">
+            </course-toc>
+        `}<br><br>${JSON.stringify(this.childEntries)}
         `;
+    }
+    get notFound(){
+        return undefined;
+    }
+    get defaultTitle(){
+        return  `${this.titleCase(this.contentType)} ${this.index || this.uid}`;
     }
 
     connectedCallback() {
@@ -76,6 +86,6 @@ class CourseToc extends ApiBehaviors(LitElement) {
         });
     }
 }
-window.customElements.define(CourseToc.tag, CourseToc);
-export { CourseToc };
- 
+window.customElements.define(CourseTocItem.tag, CourseTocItem);
+export { CourseTocItem };
+  

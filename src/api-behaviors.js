@@ -34,10 +34,20 @@ export const ApiBehaviors = function (SuperClass) {
                 if(propName === 'rawData') console.log('data updated',this.rawData);
             });s
         }
+        get notFound(){
+            return undefined;
+        }
+        get defaultTitle(){
+            return  `${this.titleCase(this.contentType)} ${this.uid}`;
+        }
+        get title(){
+            console.log(this.rawData);
+            return !this.rawData ? this.notFound : this.titleCase(this.rawData?.entry?.title) || this.defaultTitle;
+        }
         get apiURL(){
             return this.makeApiURL(this.contentType,this.uid);
         }
-        get childType(){
+        get childrenType(){
          return this.contentType === "course" 
             ? "lessons" 
             : this.contentType === "lesson" 
@@ -48,8 +58,20 @@ export const ApiBehaviors = function (SuperClass) {
                         ? "image" 
                         : undefined;
         }
+        get childType(){
+         return this.contentType === "course" 
+            ? "lesson" 
+            : this.contentType === "lesson" 
+                ? "lesson_page"
+                : this.contentType === "lesson_page" 
+                    ? "content_section" 
+                    : this.contentType === "gallery" 
+                        ? "image" 
+                        : undefined;
+        }
+
         get childEntries(){
-            return !this.rawData?.entry || !this.childType ? undefined : this.rawData.entry[this.childType];
+            return !this.rawData?.entry || !this.childrenType ? undefined : this.rawData.entry[this.childrenType];
         }
         get fetchConfig(){
             console.log(this.apiURL);
@@ -63,6 +85,14 @@ export const ApiBehaviors = function (SuperClass) {
                 },
                 dataType: "json"
             };
+        }
+        titleCase(str){
+            return str.replace(
+                /\w\S*/g,
+                function(txt) {
+                  return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                }
+            );
         }
         makeApiURL(contentType,uid){
             return !!contentType && !!uid ? `https://cdn.contentstack.io/v3/content_types/${contentType}/entries/${uid}?environment=production` : false;

@@ -69,6 +69,9 @@ import './course-toc.js';
         ` : html`NONE`}
      `;
    }
+   get notFound(){
+       return 'Resource Not Found';
+   }
  
    connectedCallback() {
      super.connectedCallback();
@@ -81,10 +84,7 @@ import './course-toc.js';
     disconnectedCallback() {
         super.disconnectedCallback();
     }
-    get title(){
-        console.log(this.rawData);
-        return !this.rawData ? 'Resource Not Found' : this.rawData?.entry?.title || `${this.contentType} ${this.uid}`;
-    }
+
     updated(changedProperties) {
         if(super.updated) super.updated(changedProperties);
         changedProperties.forEach((oldValue, propName) => {
