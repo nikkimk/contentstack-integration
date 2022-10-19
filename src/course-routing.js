@@ -2,8 +2,9 @@
  * Copyright 2019 The Pennsylvania State University
  * @license Apache-2.0, see License.md for full text.
  */
- import { LitElement, html, css } from "lit";
+import { LitElement, html, css } from "lit";
 import { ApiBehaviors } from "./api-behaviors.js";
+import './course-toc.js';
  
  /**
   * `course-routing`
@@ -56,7 +57,11 @@ import { ApiBehaviors } from "./api-behaviors.js";
             </a>.
 
         ` : this.contentType === "course" ? html`
-            COURSE
+            <course-toc 
+              .raw-data="${this.rawData}"
+              content-type="${this.contentType}"
+              uid="${this.uid}"
+            ></course-toc>
         ` : this.contentType === "lesson" ? html`
             LESSON
         ` : this.contentType === "lesson_page" ? html`

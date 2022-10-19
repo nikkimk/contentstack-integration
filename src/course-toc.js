@@ -5,12 +5,12 @@
  import { LitElement, html, css } from "lit";
  import { ApiBehaviors } from "./api-behaviors.js";
   /**
-   * `course-page`
-   * a single tab within `course-pages`
+   * `course-toc`
+   * a single tab within `course-tocs`
    * 
   ### Styling
   
-  `<course-page>` provides the following custom properties
+  `<course-toc>` provides the following custom properties
   for styling:
   
   Custom property | Description | Default
@@ -19,13 +19,13 @@
    * @customElement
    * @extends LitElement
    */
- class CoursePage extends ApiBehaviors(LitElement) {
+ class CourseToc extends ApiBehaviors(LitElement) {
  
    /**
     * Store the tag name to make it easier to obtain directly.
     */
    static get tag() {
-     return "course-page";
+     return "course-toc";
    }
  
    static get styles() {
@@ -66,6 +66,6 @@
      });
    }
  }
- window.customElements.define(CoursePage.tag, CoursePage);
- export { CoursePage };
+ window.customElements.define(CourseToc.tag, CourseToc);
+ export { CourseToc };
  

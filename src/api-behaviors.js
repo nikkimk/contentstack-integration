@@ -14,12 +14,17 @@ export const ApiBehaviors = function (SuperClass) {
             return {
                 rawData: {
                     type: Object,
+                    attribute: "raw-data"
                 },
                 contentType: {
                     type: String,
+                    attribute: "content-type",
+                    reflect: true
                 },
                 uid: {
                     type: String,
+                    attribute: "uid",
+                    reflect: true
                 }
             };
         }
@@ -66,9 +71,10 @@ export const ApiBehaviors = function (SuperClass) {
             return !!contentType && !!uid ? `?type=${contentType}&uid=${uid}` : false;
         }
         updateData(){
+            if(!this.apiURL) return;
             console.log('updating',this.fetchConfig);
             let getData = async() => {
-                const response = await fetch(url, this.fetchConfig);
+                const response = await fetch(this.apiURL, this.fetchConfig);
                 return response.json();
             };
             this.rawData = getData();
